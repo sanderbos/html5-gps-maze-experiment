@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>Simple Canvas Test</title>
+</head>
+
+<body>
+
+  <h3>Simple Canvas Test</h3>
+
+  <canvas id="myCanvas" style="border: 1px" width="250" height="250"></canvas>
+
+</body>
+
+<script>
+	var myCanvas = document.getElementById("myCanvas");
+	var myContext = myCanvas.getContext("2d");
+	myContext.fillRect(50, 25, 20, 100);
+</script>
+
+</html>
