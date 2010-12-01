@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>Simple Geo Test</title>
+</head>
+
+<body>
+
+  <h3>Simple Geo Test</h3>
+
+  <p id="errormessage"></p>
+  <p id="numUpdates"></p>
+  <p id="location1">N/A</p>
+  <p id="location2">N/A</p>
+  <p id="location3">N/A</p>
+  <p id="location4">N/A</p>
+  <p id="location5">N/A</p>
+  <p id="location6">N/A</p>
+
+</body>
+
+<script>
+	var numberOfUpdates = 0;
+	var prevLat = 0.0;
+	var prevPrevLat = 0.0;
+	var prevLong = 0.0;
+	var prevPrevLong = 0.0;
+	function errorMessage(message) {
+		document.getElementById("errormessage").innerHTML = message;
+	}
+	function geoError(err) {
+		errorMessage("geoError " + err.code + ", " + err.message);
+	}
+	function updateCoords(position) {
+		numberOfUpdates++;
+		document.getElementById("numUpdates").innerHTML = "update-num: " + numberOfUpdates;
+		document.getElementById("location1").innerHTML = "lat: " + position.coords.latitude + " (" + prevLat + ", " + prevPrevLat + ")";
+		document.getElementById("location2").innerHTML = "long: " + position.coords.longitude  + " (" + prevLong + ", " + prevPrevLong + ")";
+		document.getElementById("location3").innerHTML = "accuracy: " + position.coords.accuracy;
+		document.getElementById("location4").innerHTML = "heading: " + position.coords.heading;
+		document.getElementById("location5").innerHTML = "speed: " + position.coords.speed;
+		document.getElementById("location6").innerHTML = "timestamp: " + position.coords.timestamp;
+		prevPrevLat = prevLat;
+		prevLat = position.coords.latitude;
+		prevPrevLong = prevLong;
+		prevLong = position.coords.longitude;
+	}
+	if (!navigator.geolocation) {
+		errorMessage("has no geo");
+	} else {
+		navigator.geolocation.watchPosition(updateCoords, geoError, {enableHighAccuracy: true, maximumAge: 75000, timeout: 30000});
+	}
+</script>
+
+</html>
