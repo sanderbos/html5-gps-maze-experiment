@@ -1,5 +1,5 @@
 
-function MazeBox() {
+function MazeCell() {
 	this._top = false;
 	this._right = false;
 	this._bottom = false;

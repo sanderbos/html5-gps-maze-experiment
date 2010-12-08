@@ -12,7 +12,7 @@ function MazeGame() {
     var _height;
     
     var _mazeWidth = 15;
-    var _mazeHeight = 10;
+    var _mazeHeight = 15;
     var _boxSizeX = 40;
     var _boxSizeY = 40;
     var _maze;
@@ -36,22 +36,34 @@ function MazeGame() {
     };
     
     this.initializeMaze = function() {
-    	// initialize array (x, y)
+    	// Determine correct maze size and cell sizes
+    	// Basis is 15 cell width:
+    	_mazeWidth = 15;
+    	// So that means width of individual cell of:
+    	_boxSizeX = Math.floor((_width - 20) / _mazeWidth);
+    	// Keep cells square
+    	_boxSizeY = _boxSizeX;
+    	// Fill out height in cells too
+    	_mazeHeight = Math.floor((_height - 20)/ _boxSizeY);
+    	
+    	// initialize maze array (x, y)
         _maze = new Array(_mazeWidth);
         for (var index = 0; index < _maze.length; index++) {
             _maze[index] = new Array(_mazeHeight);
         }
+        // Put 'random' cells into the maze
         for (var xindex = 0; xindex < _mazeWidth; xindex++) {
             for (var yindex = 0; yindex < _mazeHeight; yindex++) {
-            	var mazeBox = new MazeBox();
+            	var mazeCell = new MazeCell();
             	var setTop = (yindex == 0) || (_maze[xindex][yindex - 1].hasBottom());
             	var setLeft = (xindex == 0) || (_maze[xindex - 1][yindex].hasRight());
             	var mustHaveRight = (xindex == (_mazeWidth - 1));
             	var mustHaveBottom = (yindex == (_mazeHeight - 1));
-            	mazeBox.initialize(setTop, setLeft, mustHaveRight, mustHaveBottom);
-            	_maze[xindex][yindex] = mazeBox;
+            	mazeCell.initialize(setTop, setLeft, mustHaveRight, mustHaveBottom);
+            	_maze[xindex][yindex] = mazeCell;
             }
         }
+        // TODO: Traverse all paths to exit, ensure there is a long enough path and no paths are shorter
     };
 
     this.logMessage = function (message) {
@@ -83,10 +95,10 @@ function MazeGame() {
     	// Draw maze
         for (var xindex = 0; xindex < _mazeWidth; xindex++) {
             for (var yindex = 0; yindex < _mazeHeight; yindex++) {
-            	var mazeBox = _maze[xindex][yindex];
+            	var mazeCell = _maze[xindex][yindex];
             	var boxStartX = 5 + (xindex * _boxSizeX);
             	var boxStartY = 20 + (yindex * _boxSizeY);
-            	mazeBox.drawBox(_context, boxStartX, boxStartY, _boxSizeX, _boxSizeY);
+            	mazeCell.drawBox(_context, boxStartX, boxStartY, _boxSizeX, _boxSizeY);
             }
         }
         _context.stroke();
