@@ -44,11 +44,11 @@ function MazeGame() {
         for (var xindex = 0; xindex < _mazeWidth; xindex++) {
             for (var yindex = 0; yindex < _mazeHeight; yindex++) {
             	var mazeBox = new MazeBox();
-            	var mustHaveTop = (yindex == 0) || (_maze[xindex][yindex - 1].hasBottom());
+            	var setTop = (yindex == 0) || (_maze[xindex][yindex - 1].hasBottom());
+            	var setLeft = (xindex == 0) || (_maze[xindex - 1][yindex].hasRight());
             	var mustHaveRight = (xindex == (_mazeWidth - 1));
             	var mustHaveBottom = (yindex == (_mazeHeight - 1));
-            	var mustHaveLeft = (xindex == 0) || (_maze[xindex - 1][yindex].hasRight());
-            	mazeBox.initialize(mustHaveTop, mustHaveRight, mustHaveBottom, mustHaveLeft);
+            	mazeBox.initialize(setTop, setLeft, mustHaveRight, mustHaveBottom);
             	_maze[xindex][yindex] = mazeBox;
             }
         }
@@ -85,8 +85,7 @@ function MazeGame() {
             for (var yindex = 0; yindex < _mazeHeight; yindex++) {
             	var mazeBox = _maze[xindex][yindex];
             	var boxStartX = 5 + (xindex * _boxSizeX);
-            	var boxStartY = 5 + (yindex * _boxSizeY);
-            	_object.logMessage(boxStartX + ', ' + boxStartY);
+            	var boxStartY = 20 + (yindex * _boxSizeY);
             	mazeBox.drawBox(_context, boxStartX, boxStartY, _boxSizeX, _boxSizeY);
             }
         }
