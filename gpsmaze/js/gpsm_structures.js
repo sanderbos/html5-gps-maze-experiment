@@ -1,9 +1,17 @@
 
+/**
+ * Structure that represents one cell in a maze.
+ */
 function MazeCell() {
+	// Properties
 	this._top = false;
 	this._right = false;
 	this._bottom = false;
 	this._left = false;
+
+	/**
+	 * Set up a maze cell
+	 */
 	this.initialize = function(setTop, setLeft, mustHaveRight, mustHaveBottom) {
 		this._top = setTop;
 		this._left = setLeft;
@@ -22,11 +30,17 @@ function MazeCell() {
 		}
 	};
 
+	/**
+	 * Random function for maze cell creation
+	 */
 	this.pseudoRandomBoolean = function() {
 		// Actually skew randomness to make the maze not too tight
 		return (Math.random() > 0.7); 
 	};
 
+	/**
+	 * Draw cell object onto a canvas context at a certain location
+	 */
 	this.drawBox = function(context, currentX, currentY, boxSizeX, boxSizeY) {
 		if (this._top) {
 			context.moveTo(currentX, currentY);
@@ -45,6 +59,10 @@ function MazeCell() {
 			context.lineTo(currentX, currentY + boxSizeY);
 		}
 	};
+	
+	/**
+	 * Boolean accessor methods
+	 */
 	this.hasTop = function() {
 		return this._top;
 	};

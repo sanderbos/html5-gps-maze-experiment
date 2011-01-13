@@ -1,4 +1,7 @@
 <html>
+<!-- 
+  Main screen for maze game.
+-->
 <head>
 	<title>GPS Maze</title>
 	<link href="css/style.css" type="text/css" rel="stylesheet" rev="stylesheet" media="screen"></link>
@@ -15,6 +18,9 @@
 </body>
 
 <script type="text/javascript">
+    /**
+     * Set up maze game and link it to the document
+     */
 	var canvas = document.getElementById("mazeCanvas");
 	var canvasWidth = window.innerWidth - 20;
 	var canvasHeight = window.innerHeight - 20;
@@ -22,6 +28,8 @@
 	canvas.height = canvasHeight; 
 	document.mazeGame = new MazeGame();
 	document.mazeGame.initialize(canvas, window);
+
+	// Valuable tip: Find out the type of object by calling constructor on it alert(document.mazeGame.constructor);
 </script>
 
 </html>
