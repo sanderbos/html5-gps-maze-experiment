@@ -1,0 +1,18 @@
+
+ - Add player dot
+ - Allow player to be moved with cursor keys
+ - Introduce exit
+ - Detect cursor has found exit (and restart game on click/tap)
+
+ - Detect illegal move
+ - Indicate illegal move edge
+ - Notify illegal move
+ - Detect undo illegal move (return from that edge)
+ 
+ - Make better maze based on minimum path length
+ 
+ - Introduce coordinate system based on gps
+ - Introduce movement based on gps
+ 
+ - Make only part of maze visible.
+ 
