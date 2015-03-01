@@ -1,7 +1,4 @@
  
-Test project to play with HTML 5 Javascript Canvas and Location functionality.
+Dead project.
 
-For license, see WTFPL.txt
- 
-sander@sanderbos.com
- 
+Once a test project to play with HTML 5 Javascript Canvas and Location functionality.
